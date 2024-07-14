@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,12 +8,46 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/txtBanner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Hi, Sachi Just Complete Your List"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <ListView
+        android:id="@+id/listViewTodo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddToDo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBanner"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/btnAddToDo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Add ToDo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="15dp"/>
+
+    <TextView
+        android:id="@+id/txtTodoCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You have 00 todos in the list"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAddToDo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnAddToDo"
+        android:layout_margin="15dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

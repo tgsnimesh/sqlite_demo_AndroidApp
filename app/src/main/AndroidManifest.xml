@@ -13,6 +13,12 @@
         android:theme="@style/Theme.SQLiteDemo"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityEditTODO"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityAddTODO"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
