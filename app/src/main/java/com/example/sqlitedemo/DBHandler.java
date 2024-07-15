@@ -1,5 +1,6 @@
 package com.example.sqlitedemo;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -35,7 +36,7 @@ public class DBHandler extends SQLiteOpenHelper {
          */
         final String TABLE_CREATE_QUERY = "CREATE TABLE " + TABLE_NAME
                 + "("
-                + ID + " PRIMARY KEY AUTOINCREMENT, "
+                + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TITLE + " TEXT, "
                 + DESCRIPTION + " TEXT, "
                 + STARTED + " TEXT, "
@@ -55,5 +56,24 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(TABLE_DROP_QUERY);
         // crete again new database
         onCreate(db);
+    }
+
+    // add new todo to the todo table
+    public void insertData(TODOModel todoModel) {
+
+        // get writable access from database
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        // struct user data data inside of content values object
+        ContentValues todoContentValues = new ContentValues();
+        todoContentValues.put(TITLE, todoModel.getTitle());
+        todoContentValues.put(DESCRIPTION, todoModel.getDescription());
+        todoContentValues.put(STARTED, todoModel.getStarted());
+        todoContentValues.put(FINISHED, todoModel.getFinished());
+
+        // insert data to the table
+        sqLiteDatabase.insert(TABLE_NAME, null, todoContentValues);
+        //close database  connection
+        sqLiteDatabase.close();
     }
 }
