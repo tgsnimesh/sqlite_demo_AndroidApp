@@ -3,11 +3,13 @@ package com.example.sqlitedemo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ActivityAddTODO extends AppCompatActivity {
 
@@ -48,6 +50,10 @@ public class ActivityAddTODO extends AppCompatActivity {
 
                 // parse todo model data to it
                 dbHandler.insertData(todoModel);
+
+                // back to the activity main
+                startActivity(new Intent(context, MainActivity.class));
+                Toast.makeText(context, "New TODO has been added.", Toast.LENGTH_LONG).show();
             }
         });
     }
