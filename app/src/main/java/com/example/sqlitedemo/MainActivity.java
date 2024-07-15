@@ -1,12 +1,15 @@
 package com.example.sqlitedemo;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -52,6 +55,44 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ActivityAddTODO.class));
             }
         });
+
+        // show dialog box when user click todo list item
+        lvTODO.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // get user selected todo model class object from the all todo array list
+                TODOModel userSelectedTodo = todos.get(position);
+                // create popup alert dialog action box
+                showPopupActionBox(userSelectedTodo);
+            }
+        });
+    }
+
+    // create popup action alert dialog box
+    private void showPopupActionBox(TODOModel userSelectedTodo) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+        alertBuilder.setTitle(userSelectedTodo.getTitle());
+        alertBuilder.setMessage(userSelectedTodo.getDescription());
+        alertBuilder.setNegativeButton("Edit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertBuilder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertBuilder.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertBuilder.show();
     }
 
     // get all todo count from database todo table
