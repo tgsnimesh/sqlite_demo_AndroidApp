@@ -79,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                // navigate to the edit todo activity with user selected id
+                Intent activityEditTODO = new Intent(context, ActivityEditTODO.class);
+                activityEditTODO.putExtra("SELECTED_ID", userSelectedTodo.getId());
+                startActivity(activityEditTODO);
+
             }
         });
         alertBuilder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {

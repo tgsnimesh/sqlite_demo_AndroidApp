@@ -138,4 +138,34 @@ public class DBHandler extends SQLiteOpenHelper {
         sqLiteDatabase.delete(TABLE_NAME, ID + " = ?", new String[]{String.valueOf(id)});
         sqLiteDatabase.close();
     }
+
+    // select single todo by id
+    public TODOModel selectSingleTodo(int id) {
+
+        // get reference to the database, write select query and execute
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        @SuppressLint("Recycle")
+        Cursor selectedTodo = sqLiteDatabase.query(
+                TABLE_NAME
+                , new String[]{ID, TITLE, DESCRIPTION, STARTED, FINISHED}
+                , ID + " = ? "
+                , new String[]{String.valueOf(id)}
+                , null, null, null);
+
+        // set selected row to the model class and return if it isn't null
+        TODOModel todo;
+        if (selectedTodo.moveToFirst()) {
+            todo = new TODOModel(
+                    selectedTodo.getInt(0),
+                    selectedTodo.getString(1),
+                    selectedTodo.getString(2),
+                    selectedTodo.getLong(3),
+                    selectedTodo.getLong(4)
+            );
+
+            return todo;
+        }
+
+        return null;
+    }
 }
