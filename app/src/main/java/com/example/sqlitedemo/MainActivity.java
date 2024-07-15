@@ -89,7 +89,10 @@ public class MainActivity extends AppCompatActivity {
         alertBuilder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                userSelectedTodo.setFinished(System.currentTimeMillis());
+                if (dbHandler.finishTodo(userSelectedTodo) == 1)
+                    Toast.makeText(context, "Well done! your todo has been finished.", Toast.LENGTH_SHORT).show();
+                loadAllTODOs();
             }
         });
         // Delete selected dialog box
