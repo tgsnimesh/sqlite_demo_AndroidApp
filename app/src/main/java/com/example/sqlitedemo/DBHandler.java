@@ -1,7 +1,9 @@
 package com.example.sqlitedemo;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -75,5 +77,19 @@ public class DBHandler extends SQLiteOpenHelper {
         sqLiteDatabase.insert(TABLE_NAME, null, todoContentValues);
         //close database  connection
         sqLiteDatabase.close();
+    }
+
+    // get todos count
+    public int getTODOCount() {
+
+        // get readable access from the database
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        // define select all query from the database
+        final String SELECT_ALL_QUERY = "SELECT * FROM " + TABLE_NAME;
+        // execute sql query
+        @SuppressLint("Recycle")
+        Cursor allTODOCursor = sqLiteDatabase.rawQuery(SELECT_ALL_QUERY, null);
+        // get count
+        return allTODOCursor.getCount();
     }
 }

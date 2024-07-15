@@ -2,6 +2,8 @@ package com.example.sqlitedemo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     TextView txtBanner, txtTODOCount;
     ListView lvTODO;
     Button btnAddTODO;
+    Context context;
+    DBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
         lvTODO = findViewById(R.id.listViewTodo);
         btnAddTODO = findViewById(R.id.btnAddToDo);
 
+        context = this;
+        dbHandler = new DBHandler(context);
+
+        // set todo count
+        updateTODOCount();
+
         // Navigate button for add new todo activity
         btnAddTODO.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,5 +44,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ActivityAddTODO.class));
             }
         });
+    }
+
+    // get all todo count from database todo table
+    @SuppressLint("SetTextI18n")
+    public void updateTODOCount() {
+
+        int todoCount = dbHandler.getTODOCount();
+        txtTODOCount.setText("You have " + String.valueOf(todoCount) + " todos in the list");
     }
 }
