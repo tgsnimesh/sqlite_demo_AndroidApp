@@ -27,8 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtBanner"
-        android:layout_margin="20dp"
-        android:background="#f4f4f4" />
+        android:layout_margin="20dp"/>
 
     <Button
         android:id="@+id/btnAddToDo"
