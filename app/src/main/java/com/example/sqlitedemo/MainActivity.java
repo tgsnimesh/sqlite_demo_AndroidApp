@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 // reload updated todo list
                 loadAllTODOs();
                 Toast.makeText(context, "Your todo has been deleted.", Toast.LENGTH_LONG).show();
+                updateTODOCount();
             }
         });
         alertBuilder.show();
