@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -86,10 +87,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        // Delete selected dialog box
         alertBuilder.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                // call delete method
+                dbHandler.deleteSingleTodo(userSelectedTodo.getId());
+                // reload updated todo list
+                loadAllTODOs();
+                Toast.makeText(context, "Your todo has been deleted.", Toast.LENGTH_LONG).show();
             }
         });
         alertBuilder.show();

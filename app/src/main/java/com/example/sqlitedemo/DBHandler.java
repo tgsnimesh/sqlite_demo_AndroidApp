@@ -128,4 +128,14 @@ public class DBHandler extends SQLiteOpenHelper {
         // return all todo array list
         return todos;
     }
+
+    // delete single todo
+    public void deleteSingleTodo(int id) {
+
+        // get writable access from the database
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        // delete row is equal to the id
+        sqLiteDatabase.delete(TABLE_NAME, ID + " = ?", new String[]{String.valueOf(id)});
+        sqLiteDatabase.close();
+    }
 }
