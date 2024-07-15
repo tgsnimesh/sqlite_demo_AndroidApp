@@ -168,4 +168,25 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return null;
     }
+
+    // update single todo
+    public int updateSingleTodo(TODOModel todoModel) {
+
+        // get reference to the database
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        // set data into the content values object
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TITLE, todoModel.getTitle());
+        contentValues.put(DESCRIPTION, todoModel.getDescription());
+        contentValues.put(STARTED, todoModel.getStarted());
+        contentValues.put(FINISHED, todoModel.getFinished());
+
+        // update row
+         return sqLiteDatabase.update(
+                TABLE_NAME
+                , contentValues
+                , ID + " = ? "
+                , new String[]{String.valueOf(todoModel.getId())});
+    }
 }

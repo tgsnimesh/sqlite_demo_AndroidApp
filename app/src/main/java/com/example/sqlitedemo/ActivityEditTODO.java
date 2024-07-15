@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ActivityEditTODO extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class ActivityEditTODO extends AppCompatActivity {
     Context context;
     DBHandler dbHandler;
     TODOModel todoModel;
+    int selectedId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class ActivityEditTODO extends AppCompatActivity {
 
         // get user selected id parsed from activity main
         Intent activityMain = getIntent();
-        final int selectedId = activityMain.getIntExtra("SELECTED_ID", -1);
+        selectedId = activityMain.getIntExtra("SELECTED_ID", -1);
 
         // get database connection
         dbHandler = new DBHandler(context);
@@ -51,6 +53,24 @@ public class ActivityEditTODO extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // get current updated todo information
+                String title = etTitle.getText().toString()
+                        , description = etDescription.getText().toString();
+                long started = System.currentTimeMillis();
+
+                // call update method and parse model class object to it
+                int status = dbHandler.updateSingleTodo(new TODOModel(
+                        selectedId
+                        , title
+                        , description
+                        , started
+                        , 0
+                ));
+
+                if (status == 1) {
+                    startActivity(new Intent(context, MainActivity.class));
+                    Toast.makeText(context, "ToDo has been updated.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
