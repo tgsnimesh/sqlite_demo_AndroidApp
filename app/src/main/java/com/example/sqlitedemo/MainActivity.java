@@ -34,7 +34,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ActivityAddTODO.class));
             }
         });
-
-//        DBHandler dbHandler = new DBHandler(getApplicationContext());
     }
 }
