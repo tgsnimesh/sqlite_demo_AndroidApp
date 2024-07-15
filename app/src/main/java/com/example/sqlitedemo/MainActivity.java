@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 userSelectedTodo.setFinished(userSelectedTodo.getFinished() > 0 ? 0 : System.currentTimeMillis());
                 if (dbHandler.finishTodo(userSelectedTodo) == 1)
-                    Toast.makeText(context, "Well done! your todo has been finished.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, (userSelectedTodo.getFinished() > 0 ? "Well done! Your todo has been finished." : "Just removed Your todo finished mark !"), Toast.LENGTH_SHORT).show();
                 loadAllTODOs();
             }
         });
