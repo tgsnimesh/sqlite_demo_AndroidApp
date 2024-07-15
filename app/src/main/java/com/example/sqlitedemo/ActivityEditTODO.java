@@ -15,7 +15,7 @@ public class ActivityEditTODO extends AppCompatActivity {
 
     TextView txtBanner;
     EditText etTitle, etDescription;
-    Button btnEditTODO;
+    Button btnEditTODO, btnLoadTodo;
 
     Context context;
     DBHandler dbHandler;
@@ -31,6 +31,7 @@ public class ActivityEditTODO extends AppCompatActivity {
         etTitle = findViewById(R.id.title);
         etDescription = findViewById(R.id.description);
         btnEditTODO = findViewById(R.id.btnEditTODO);
+        btnLoadTodo = findViewById(R.id.btnLoadTodo);
 
         context = this;
         todoModel = new TODOModel();
@@ -44,9 +45,8 @@ public class ActivityEditTODO extends AppCompatActivity {
         // get user selected row and set it into the model class object
         todoModel = dbHandler.selectSingleTodo(selectedId);
 
-        // set user selected todo to text field
-        etTitle.setText(todoModel.getTitle());
-        etDescription.setText(todoModel.getDescription());
+        // load todo info
+        completeTodoInputField();
 
         // edit selected ToDo action button
         btnEditTODO.setOnClickListener(new View.OnClickListener() {
@@ -73,5 +73,19 @@ public class ActivityEditTODO extends AppCompatActivity {
                 }
             }
         });
+
+        // load todo info
+        btnLoadTodo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                completeTodoInputField();
+            }
+        });
+    }
+
+    public void completeTodoInputField() {
+        // set user selected todo to text field
+        etTitle.setText(todoModel.getTitle());
+        etDescription.setText(todoModel.getDescription());
     }
 }

@@ -60,4 +60,14 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="20dp"/>
 
+    <Button
+        android:id="@+id/btnLoadTodo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Clear and Load ToDo"
+        app:layout_constraintBottom_toTopOf="@+id/btnEditTODO"
+        app:layout_constraintEnd_toEndOf="@+id/btnEditTODO"
+        app:layout_constraintStart_toStartOf="@+id/btnEditTODO"
+        android:layout_marginBottom="10dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
