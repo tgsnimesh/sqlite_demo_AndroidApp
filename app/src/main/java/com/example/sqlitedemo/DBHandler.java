@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DBHandler extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "todo";
@@ -91,5 +94,38 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor allTODOCursor = sqLiteDatabase.rawQuery(SELECT_ALL_QUERY, null);
         // get count
         return allTODOCursor.getCount();
+    }
+
+    // get all todo from the todo table
+    public List<TODOModel> getAllTODOS() {
+
+        // define empty todos array list and database readable object
+        ArrayList<TODOModel> todos = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+        // define sqlite select query and execute it
+        final String SELECT_ALL_QUERY = "SELECT * FROM " + TABLE_NAME;
+        Cursor allTODOCursor = sqLiteDatabase.rawQuery(SELECT_ALL_QUERY, null);
+
+        // get first row and check if it's null table or not
+        if (allTODOCursor.moveToFirst()) {
+            // if it is not null so, get cursor object have data column by column and parse it in to the model class
+            do {
+
+                TODOModel todoModel = new TODOModel(
+                        allTODOCursor.getInt(0),
+                        allTODOCursor.getString(1),
+                        allTODOCursor.getString(2),
+                        allTODOCursor.getLong(3),
+                        allTODOCursor.getLong(4)
+                );
+
+                // add model object in to the array list
+                todos.add(todoModel);
+            } while (allTODOCursor.moveToNext());
+        }
+
+        // return all todo array list
+        return todos;
     }
 }
