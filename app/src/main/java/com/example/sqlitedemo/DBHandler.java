@@ -104,8 +104,11 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
         // define sqlite select query and execute it
-        final String SELECT_ALL_QUERY = "SELECT * FROM " + TABLE_NAME;
-        Cursor allTODOCursor = sqLiteDatabase.rawQuery(SELECT_ALL_QUERY, null);
+        Cursor allTODOCursor = sqLiteDatabase.query(
+                TABLE_NAME
+                , new String[]{ID, TITLE, DESCRIPTION, STARTED, FINISHED}
+                , null, null, null, null
+                , ID + " DESC");
 
         // get first row and check if it's null table or not
         if (allTODOCursor.moveToFirst()) {
