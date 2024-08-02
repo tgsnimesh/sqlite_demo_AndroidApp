@@ -54,18 +54,22 @@ public class ActivityEditTODO extends AppCompatActivity {
             public void onClick(View v) {
 
                 // get current updated todo information
-                String title = etTitle.getText().toString()
-                        , description = etDescription.getText().toString();
+                String title = etTitle.getText().toString().trim()
+                        , description = etDescription.getText().toString().trim();
                 long started = System.currentTimeMillis();
 
                 // call update method and parse model class object to it
-                int status = dbHandler.updateSingleTodo(new TODOModel(
-                        selectedId
-                        , title
-                        , description
-                        , started
-                        , 0
-                ));
+                int status = 0;
+                if(!title.isEmpty())
+                    status = dbHandler.updateSingleTodo(new TODOModel(
+                            selectedId
+                            , title
+                            , description
+                            , started
+                            , 0
+                    ));
+                else
+                    Toast.makeText(context, "Your title is Empty !", Toast.LENGTH_SHORT).show();
 
                 if (status == 1) {
                     startActivity(new Intent(context, MainActivity.class));
