@@ -40,20 +40,25 @@ public class ActivityAddTODO extends AppCompatActivity {
                 long started, finished;
 
                 // get user input data
-                title = etTitle.getText().toString();
-                description = etDescription.getText().toString();
+                title = etTitle.getText().toString().trim();
+                description = etDescription.getText().toString().trim();
                 started = System.currentTimeMillis();
                 finished = 0;
 
-                // set user input all data to todo model class
-                TODOModel todoModel = new TODOModel(title, description, started, finished);
+                if(!title.isEmpty()) {
 
-                // parse todo model data to it
-                dbHandler.insertData(todoModel);
+                    // set user input all data to todo model class
+                    TODOModel todoModel = new TODOModel(title, description, started, finished);
 
-                // back to the activity main
-                startActivity(new Intent(context, MainActivity.class));
-                Toast.makeText(context, "New TODO has been added.", Toast.LENGTH_LONG).show();
+                    // parse todo model data to it
+                    dbHandler.insertData(todoModel);
+
+                    // back to the activity main
+                    startActivity(new Intent(context, MainActivity.class));
+                    Toast.makeText(context, "New TODO has been added.", Toast.LENGTH_LONG).show();
+                } else
+                    Toast.makeText(context, "Your title is Empty !", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
